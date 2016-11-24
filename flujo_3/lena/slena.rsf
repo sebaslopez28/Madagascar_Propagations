@@ -1,0 +1,94 @@
+n1=512 n2=513 in=lena.img data_format=native_uchar
+1.7	sfdd	madagascar/flujo_3/lena:	jsuarez_cps@Osaka	Fri Oct  2 14:47:14 2015
+
+	data_format="native_float"
+	esize=4
+	in="/media/Data/Madagascar_var_tmp/user_jsuarez_cps/madagascar/flujo_3/lena/lena.rsf@"
+1.7	sftransp	madagascar/flujo_3/lena:	jsuarez_cps@Osaka	Fri Oct  2 14:47:14 2015
+
+	n2=512
+	data_format="native_float"
+	esize=4
+	in="stdout"
+	n1=513
+	in="stdin"
+
+1.7	sfput	madagascar/flujo_3/lena:	jsuarez_cps@Osaka	Fri Oct  2 14:47:14 2015
+
+	in="stdout"
+	o1=0
+	d2=0.01
+	o2=0
+	data_format="native_float"
+	d1=0.004
+	in="stdin"
+
+1.7	sffft1	madagascar/flujo_3/lena:	jsuarez_cps@Osaka	Fri Oct  2 14:47:15 2015
+
+	o1=0
+	data_format="native_complex"
+	fft_n1=513
+	esize=8
+	fft_o1=0
+	in="stdout"
+	d1=0.462963
+	n1=271
+	in="stdin"
+
+1.7	sffft3	madagascar/flujo_3/lena:	jsuarez_cps@Osaka	Fri Oct  2 14:47:15 2015
+
+	d2=0.0976562
+	n2=1024
+	fft3_n2=512
+	o2=-50
+	fft3_o2=0
+	data_format="native_complex"
+	esize=8
+	in="stdout"
+	in="stdin"
+
+1.7	sfdipfilter	madagascar/flujo_3/lena:	jsuarez_cps@Osaka	Fri Oct  2 14:47:15 2015
+
+	data_format="native_complex"
+	esize=8
+	in="stdout"
+	in="stdin"
+
+1.7	sffft3	madagascar/flujo_3/lena:	jsuarez_cps@Osaka	Fri Oct  2 14:47:15 2015
+
+	d2=0.01
+	n2=512
+	o2=0
+	data_format="native_complex"
+	esize=8
+	in="stdout"
+	in="stdin"
+
+1.7	sffft1	madagascar/flujo_3/lena:	jsuarez_cps@Osaka	Fri Oct  2 14:47:15 2015
+
+	o1=0
+	data_format="native_float"
+	esize=4
+	in="stdout"
+	d1=0.004
+	n1=513
+	in="stdin"
+
+1.7	sfbandpass	madagascar/flujo_3/lena:	jsuarez_cps@Osaka	Fri Oct  2 14:47:15 2015
+
+	data_format="native_float"
+	esize=4
+	in="stdout"
+	in="stdin"
+
+1.7	sftransp	madagascar/flujo_3/lena:	jsuarez_cps@Osaka	Fri Oct  2 14:47:15 2015
+
+	o1=0
+	d2=0.004
+	n2=513
+	o2=0
+	data_format="native_float"
+	esize=4
+	in="/media/Data/Madagascar_var_tmp/user_jsuarez_cps/madagascar/flujo_3/lena/slena.rsf@"
+	d1=0.01
+	n1=512

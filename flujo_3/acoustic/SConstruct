@@ -1,0 +1,10 @@
+# http://www.scons.org/doc/production/HTML/scons-man.html
+import os
+RSFROOT=os.environ['RSFROOT']
+env = Environment(LIBS=['m','rsf'], 
+                  CFLAGS=['-Wall','-g','-fopenmp'],
+                  LIBPATH=['/usr/lib',RSFROOT+'/lib'],
+                  CPPPATH=['/usr/include', RSFROOT+'/include']) 
+env.Append(LINKFLAGS=['-fopenmp'])
+env.Program(target='Acous2d', source='acous2d_mp.c' )
+

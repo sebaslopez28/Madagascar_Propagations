@@ -1,0 +1,28 @@
+in="overthrust.vites"
+n1=801 n2=801  n3=187 
+o1=0.0 o2=0.0  o3=0.0
+d1=25.0 d2=25.0 d3=25.0
+esize=4
+data_format=xdr_float
+1.7	sfdd	madagascar/flujo_4/overthrust:	jsuarez_cps@Osaka	Thu Nov 24 11:12:52 2016
+
+	data_format="native_float"
+	esize=4
+	in="stdout"
+	in="stdin"
+
+1.7	sfput	madagascar/flujo_4/overthrust:	jsuarez_cps@Osaka	Thu Nov 24 11:12:52 2016
+
+	data_format="native_float"
+	unit=m/s
+	in="/media/Data/Madagascar_var_tmp/user_jsuarez_cps/madagascar/flujo_4/overthrust/overthrust.rsf@"
+	d1=25
+	unit1=m
+	d2=25
+	unit2=m
+	d3=25
+	unit3=m
+	label=Velocity
+	label1=X
+	label2=Y
+	label3=Z

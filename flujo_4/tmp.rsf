@@ -1,0 +1,77 @@
+in="overthrust.vites"
+n1=801 n2=801  n3=187 
+o1=0.0 o2=0.0  o3=0.0
+d1=25.0 d2=25.0 d3=25.0
+esize=4
+data_format=xdr_float
+1.7	sfdd	madagascar/flujo_4/overthrust:	jsuarez_cps@Osaka	Thu Nov 24 11:12:52 2016
+
+	data_format="native_float"
+	esize=4
+	in="stdout"
+	in="stdin"
+
+1.7	sfput	madagascar/flujo_4/overthrust:	jsuarez_cps@Osaka	Thu Nov 24 11:12:52 2016
+
+	data_format="native_float"
+	unit=m/s
+	in="/media/Data/Madagascar_var_tmp/user_jsuarez_cps/madagascar/flujo_4/overthrust/overthrust.rsf@"
+	d1=25
+	unit1=m
+	d2=25
+	unit2=m
+	d3=25
+	unit3=m
+	label=Velocity
+	label1=X
+	label2=Y
+	label3=Z
+1.7	sfwindow	madagascar/flujo_4/overthrust:	jsuarez_cps@Osaka	Thu Nov 24 11:12:53 2016
+
+	d2=50
+	n2=401
+	o1=0
+	d3=50
+	n3=94
+	o2=0
+	label1="X"
+	data_format="native_float"
+	o3=0
+	label2="Y"
+	label3="Z"
+	esize=4
+	j1=2
+	in="stdout"
+	j2=2
+	unit1="m"
+	j3=2
+	unit2="m"
+	unit3="m"
+	d1=50
+	n1=401
+	in="stdin"
+
+1.7	sftransp	madagascar/flujo_4/overthrust:	jsuarez_cps@Osaka	Thu Nov 24 11:12:53 2016
+
+	o1=0
+	label1="Z"
+	d3=50
+	n3=401
+	data_format="native_float"
+	o3=0
+	label3="X"
+	esize=4
+	in="/media/Data/Madagascar_var_tmp/user_jsuarez_cps/madagascar/flujo_4/overthrust/overthrust_sample.rsf@"
+	unit1="m"
+	unit3="m"
+	d1=50
+	n1=94
+1.7	sfspray	jsuarez_cps/madagascar/flujo_4:	jsuarez_cps@Osaka	Thu Nov 24 11:13:02 2016
+
+	data_format="native_float"
+	d4=0.08
+	n4=25
+	n5=1
+	o4=0
+	esize=4
+	in="/media/Data/Madagascar_var_tmp/user_jsuarez_cps/jsuarez_cps/madagascar/flujo_4/tmp.rsf@"

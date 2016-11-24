@@ -1,0 +1,6 @@
+n1=512 n2=513 in=lena.img data_format=native_uchar
+1.7	sfdd	madagascar/flujo_3/lena:	jsuarez_cps@Osaka	Fri Oct  2 14:47:14 2015
+
+	data_format="native_float"
+	esize=4
+	in="/media/Data/Madagascar_var_tmp/user_jsuarez_cps/madagascar/flujo_3/lena/lena.rsf@"

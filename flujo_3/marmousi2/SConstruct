@@ -1,0 +1,19 @@
+from rsf.proj import *
+
+segy=['vp_marmousi-ii.segy']
+      
+#Fetch(segy,"marm2")
+
+# convierte de formato SEGY a RSF, y se submuestrea 
+# los datos (sfwindow), para disminuir su tamagno. 
+Flow ('Vp tfile_vp',segy,
+    '''segyread tape=${SOURCES[0]} tfile=${TARGETS[1]} | scale rscale=1000 
+       | put d1=1.25 d2=1.25 o1=0 o2=0 label1=Depth label2=Coordinates 
+      unit 1=m unit2=m | window j1=8 j2=8
+''' )
+
+Result('Vp','''grey color=j mean=y scalebar=y screenratio=0.25 
+      title="P-velocity model [m/s]" barreverse=y ''')
+
+
+End()

@@ -1,0 +1,50 @@
+
+from rsf.proj import *
+from math import pi,sqrt
+
+timesteps=1500 # timesteps*0.001=sec
+Vmin = 1028.   # vel. minima [m/s]
+Vmax = 4700.   # vel. maxima [m/s]
+dh = 10.       # tamagno de malla [m]
+dt = dh/(Vmax*sqrt(8/3.)) # paso de tiempo calculado
+dt = 0.001     # paso de tiempo [s]
+Nl = 10        # numero de puntos por logitud de onda
+Fq = Vmin/(dh*Nl)    # frequencia central [Hz]
+t0=1./Fq     # time offset
+
+print ' '
+print '***************************'
+print '* Parametros del modelado *'
+print '***************************'
+print '   dt = %0.1f [ms]' % (dt*1e3)
+print '   dt = %0.5f [s]'  % (dt)
+print '   dh = %0.1f [m]'  % (dh)
+print '   Fq = %0.1f [Hz]' % (Fq)
+print '   Tout = %d steps' % (timesteps)
+print '   Time = %0.1f [s]'% (dt*timesteps)
+print '***************************'
+
+#funcion ondicula fuente
+Flow('Ricker',None,
+      '''sfmath n1=%d d1=%g o1=%g 
+         output="(1-2*((%g*%g)^2)*((x1-%g)^2))*exp(-((%g*%g)*(x1-%g))^2)"
+      '''%(timesteps,dt,0,pi,Fq,t0,pi,Fq,t0) )
+
+model='marmousi2/Vp'
+
+
+Flow('field',model,'''./acoustic/Acous2d wav=Ricker.rsf Sz=20 Sx=8000 Skip=20''')
+
+Flow('tmp',model,'''sfspray axis=3 n=75 d=0.0:2 o=0 ''') #2D-->3D
+
+
+Result('mov','tmp field',
+'''math a=${SOURCES[0]} b=${SOURCES[1]} output="a-b*0.5e4" | grey mean=y color=x scalebar=y barreverse=y screenratio=0.25 minval=1400 maxval=4500''')
+
+Result('field',
+      '''sfgrey clip=0.25 color=x scalebar=y barreverse=y  screenratio=0.5   \
+         title="dt=%g[s], dh=%g[m] at %g Hz" wantframenum=y
+      '''%(dt,dh,Fq))
+
+
+End()

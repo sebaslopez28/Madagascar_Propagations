@@ -1,0 +1,28 @@
+from rsf.proj import *
+
+# Download the input data file
+Fetch('lena.img','imgs' ) 
+
+# Create RSF header
+Flow('lena.hdr','lena.img','''echo n1=512 n2=513 in=$SOURCE 
+            data_format=native_uchar''', stdin=0)
+
+# Convert to float binary data
+Flow('lena','lena.hdr','''sfdd type=float ''')
+
+# Display0
+Result('lena',''' sfgrey title="Lena Soderberg" transp=n
+                  color=b bias=128 clip=100 screenratio=1 ''')
+
+def grey(title,allpos=1):
+    return ''' grey transp=n allpos=%d title="%s"
+               screenratio=1 wantaxis=n ''' % (allpos,title)
+               
+Flow('slena','lena', ''' transp | put d1=0.004 d2=0.01 o2=0 o1=0 |
+                        fft1 | fft3 |  dipfilter v1=-1.5 v2=-1 
+                        v3=1 v4=1.5 taper=2 pass=0 | fft3 inv=y | 
+                        fft1 inv=y | bandpass flo=15 fhi=45 | transp
+                     ''')
+Result('slena',grey('Seismic Lena',0))
+
+End()

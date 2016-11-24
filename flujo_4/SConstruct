@@ -1,0 +1,54 @@
+
+from rsf.proj import *
+from math import pi,sqrt
+
+timesteps=500   # timesteps*0.001=sec
+Vmin = 2179.0   # vel. minima [Km/s]
+Vmax = 6000.0   # vel. maxima [Km/s]
+dh = 50.        # tamagno de malla [Km]
+dt = dh/(Vmax*2.) # paso de tiempo calculado
+dt = 0.004    # paso de tiempo [s]
+Nl = 6        # numero de puntos por logitud de onda
+Fq = Vmin/(dh*Nl)    # frequencia central [Hz]
+t0=1./Fq     # time offset
+
+print ' '
+print '***************************'
+print '* Parametros del modelado *'
+print '***************************'
+print '   dt = %0.1f [ms]' % (dt*1e3)
+print '   dt = %0.4f [s]'  % (dt)
+print '   dh = %0.2f [m]'  % (dh)
+print '   Fq = %0.1f [Hz]' % (Fq)
+print '   Tout = %d steps' % (timesteps)
+print '   Time = %0.1f [s]'% (dt*timesteps)
+print '***************************'
+
+#funcion ondicula fuente
+Flow('Ricker',None,
+      '''sfmath n1=%d d1=%g o1=%g 
+         output="(1-2*((%g*%g)^2)*((x1-%g)^2))*exp(-((%g*%g)*(x1-%g))^2)"
+      '''%(timesteps,dt,0,pi,Fq,t0,pi,Fq,t0) )
+
+model='overthrust/overthrust_sample'
+
+Flow('field',model,
+      '''./acoustic/Acous3d wav=Ricker.rsf Sz=200. Sy=10000. Sx=10000. Skip=20
+      ''')
+"""
+Result('movie3D','field',
+      '''byte clip=0.01 | grey4 color=x screenratio=0.5 frame1=5  \
+         frame2=200 frame3=200 flat=n title="dt=%g[s], dh=%g[m] at %g Hz" 
+         screenratio=0.31 point1=0.6 point2=0.6
+      '''%(dt,dh,Fq))
+"""
+
+Flow('tmp',model,'''spray axis=4 n=25 d=0.08 o=0''')
+
+Result('mov','tmp field','''math a=${SOURCES[0]} b=${SOURCES[1]}  
+                            output="a-b*1e5" | byte mean=y | grey4 color=j
+                            frame1=5 frame2=200 frame3=200 flat=n
+                            screenratio=0.31 point1=0.6 point2=0.6''')
+
+
+End()
